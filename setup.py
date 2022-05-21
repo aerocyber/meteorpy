@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="meteorpy",
-    version="0.0.3",
+    version="0.0.4-dev0",
     author="aerocyber",
     description="A tool to share python environment by building it from scratch on target machines.",
     long_description=long_description,
