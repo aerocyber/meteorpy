@@ -14,3 +14,18 @@
 # NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
 # DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+import os
+
+
+def read_meteorfile(file_path):
+    f = open(file_path)
+    dat = f.read()
+    f.close()
+
+
+def write_meteorfile(out_path: str, options: dict):
+    if not os.path.isdir(out_path):
+        raise ValueError(out_path + " is not a directory.")
+    dat = []
+    
