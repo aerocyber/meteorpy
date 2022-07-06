@@ -15,17 +15,50 @@
 # DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import os
+
+from json import loads
+from jsonschema import validate
+
+class ConfigError(Exception):
+    pass
 
 
-def read_meteorfile(file_path):
-    f = open(file_path)
-    dat = f.read()
-    f.close()
+def create_file_contents(py_version: str, deps: str, py_lock: bool = True) -> dict:
+    """
+        Create the content for Meteorfile.
+        py_version[str]: Version of Python to lock. Pass 'None' with py_lock=False to disable.
+        deps[str]: Output of `pip freeze` command as it is.
+        py_lock[bool]: Whether to lock python or not.
+    """
+    meteor_content = {
+        "Lock Python": py_lock
+    }
+    if not py_lock and py_version == 'None':
+        meteor_content["Lock Python Version"] = ''
+    elif (py_lock and py_version == 'None') or (not py_lock and py_version != 'None'):
+        raise ConfigError("Values of py_lock and py_version conflict each other.")
+    else:
+        meteor_content["Lock Python Version"] = py_version
+    meteor_content["Dependencies"] = deps
+    return meteor_content
 
 
-def write_meteorfile(out_path: str, options: dict):
-    if not os.path.isdir(out_path):
-        raise ValueError(out_path + " is not a directory.")
-    dat = []
-    
+def read_file_contents(content: str) -> dict:
+    """
+        Read content of Meteorfile.
+        content[str]: Content of Meteorfile.
+    """
+    schema = {
+        "type" : "object",
+        "properties" : {
+            "Lock Python" : {"type" : "string"},
+            "Lock Python Version" : {"type" : "string"},
+            "Dependencies": {"type": "string"},
+        },
+    }
+    try:
+        validate(instance=content, schema=schema)
+    except Exception as e:
+        return {"Error": e}
+    else:
+        return json.loads(content)
