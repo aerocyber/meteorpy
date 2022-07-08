@@ -108,7 +108,8 @@ class BuildEnv(venv.EnvBuilder):
 
     def post_setup(self, context):
         for i in self.requirements:
-            subprocess.check_call([sys.executable, '-m', 'pip', 'install', i])
+            if i:
+                subprocess.check_call([sys.executable, '-m', 'pip', 'install', i])
 
 def build(path, with_pip = True, system_site_packages = False, prompt = False, 
 clear = False, upgrade = False, upgrade_deps = False, requirements = [], install_requirements = True):
@@ -116,6 +117,6 @@ clear = False, upgrade = False, upgrade_deps = False, requirements = [], install
     if not prompt:
         if os.path.isfile(path):
             path = os.path.dirname(path)
-        prompt = "Aurora:: " + path
+        prompt = "Meteorpy:: " + path
     builder = BuildEnv(path, with_pip, system_site_packages, prompt, clear, upgrade, upgrade_deps, requirements, install_requirements)
     
