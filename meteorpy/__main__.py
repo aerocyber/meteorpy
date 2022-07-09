@@ -26,7 +26,7 @@ from API import get_deps, get_python, get_remote_python, meteorfile, venv_manage
 # Group: create: Create meteorfile
 
 
-@click.command()
+@click.command("create")
 @click.option('--path', '-p', 'path', default='./venv/', help="Path where virtual environment is to be created. Relative path.", show_default=True, required=True)
 @click.option('--python-version', 'python', default=python_version(), help="Python version to lock", show_default=True, required=True)
 @click.option('--with-pip', '-P', 'with_pip', is_flag=True, default=True, help="With pip support", show_default=True)
@@ -51,7 +51,7 @@ def create(path, python, with_pip, system_site_packages, prompt, clear, upgrade,
  click.echo("Meteorfile created")
 
 
-@click.command()
+@click.command("recreate")
 @click.option('--meteorfile', '-m', 'meteorpath', default='./Meteorfile', required=True, show_default=True, help="Path to Meteorfile")
 def env(meteorpath):
     """ 
