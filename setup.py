@@ -21,4 +21,9 @@ setuptools.setup(
     ],
     package_dir={"": "meteorpy"},
     python_requires=">=3.6",
+    entry_points={
+        'console_scripts': [
+            'yourscript = meteorpy.__main__:env',
+        ],
+    },
 )
