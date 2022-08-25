@@ -79,6 +79,6 @@ def read_file_contents(content: str) -> dict:
     try:
         validate(instance=content, schema=schema)
     except Exception as e:
-        raise FormatError("Invalid omio format")
+        raise FormatError("Invalid meteorfile format")
     else:
-        return json.loads(content)
+        return loads(content)

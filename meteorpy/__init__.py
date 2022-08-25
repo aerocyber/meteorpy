@@ -15,9 +15,9 @@
 # DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import API
+# from . import API
 import __main__
 
 
-__api_version__ = API.API_VERSION
+__api_version__ = '1.0.0-dev0'
 __version__ = '0.0.4-dev0'

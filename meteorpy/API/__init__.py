@@ -16,6 +16,5 @@
 # DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-from . import meteorfile, venv_manage
+from . import get_deps, get_remote_python, get_python, meteorfile, venv_manage
 
-API_VERSION = '1.0.0-dev0'

@@ -16,7 +16,6 @@
 # DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import getpass
 import os
 import platform
 import subprocess
@@ -37,7 +36,7 @@ def dwnl_python(target_path, version=platform.python_version(), download_target=
     if download_target == 'Windows':
         url_modifier = version + '/' + 'python-' + version + '-amd64.exe'
         commands = [
-            'python-' + version + '-amd64.exe' + '/passive InstallAllUsers=0 TargetDir=' + os.path.expanduser('~') + '\\.meteorpy\\python-' + version + '\\ AssociateFiles=0 Shortcuts=0 Include_doc=0 Include_launcher=0 InstallLauncherAllUsers=0'
+            'python-' + version + '-amd64.exe' + '/passive InstallAllUsers=0 TargetDir=' + os.path.join(os.getcwd(), 'venv', 'python-' + version) + 'AssociateFiles=0 Shortcuts=0 Include_doc=0 Include_launcher=0 InstallLauncherAllUsers=0'
         ]
     elif download_target == 'Linux':
         url_modifier = version + '/' + 'Python-' + version + '.tgz'
@@ -57,7 +56,7 @@ def dwnl_python(target_path, version=platform.python_version(), download_target=
             with open(os.path.join(target_path, URL.split('/')[-1])) as f:
                 f.write(r.raw.read())
     for i in commands:
-        _cmd = command.split(' ')
+        _cmd = commands.split(' ')
         _out = subprocess.run(_cmd, capture_output=True)
         if _out:
             sys.stdout.write(_out)
