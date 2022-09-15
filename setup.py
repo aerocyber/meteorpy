@@ -1,3 +1,8 @@
+# Copyright (c) 2022 aerocyber
+# 
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
+
 import setuptools
 
 with open("README.md", "r", encoding="utf-8") as fh:
