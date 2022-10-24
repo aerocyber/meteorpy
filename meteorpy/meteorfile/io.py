@@ -44,6 +44,9 @@ def validate_meteorfile(meteorfile_content: str)-> bool:
                         }
                     }
                 }
+            },
+            "Relative environment path": {
+                "type": "string"
             }
         }
     }
